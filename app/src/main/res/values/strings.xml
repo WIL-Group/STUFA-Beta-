@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">STUFA</string>
+    <string name="bloemfontein_campus">Bloemfontein Campus</string>
+    <string name="welkom_campus">Welkom Campus</string>
+    <string name="bloemfontein">Bloemfontein</string>
+    <string name="welkom">Welkom</string>
 </resources>
