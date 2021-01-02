@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
                 tvEmail.setText(String.format("%s%s",  "Email Address: ", value.getString("email")));
 
-                tvCourse.setText(value.getString("course"));
+//                tvCourse.setText(String.format("%s%s",  "Campus: ", value.getString("campus")));
+//                tvCourse.setText(value.getString("course"));
 
                 tvStudentNumber.setText(String.format("%s%s",  "Student Number: ", value.getString("studentNumber")));
             }

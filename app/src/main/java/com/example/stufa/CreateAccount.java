@@ -1,6 +1,7 @@
 package com.example.stufa;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -9,9 +10,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +36,8 @@ public class CreateAccount extends AppCompatActivity {
     EditText etName, etSurname, etEmail, etStudentNumber, etPassword, etConfirmPassword;
     Button btnSignUp;
     TextView tvLogin;
+//    RadioGroup rgCampus;
+//    RadioButton rbCampusResult;
 
     SwitchCompat switchPos;
     View progressBarLayout, contentLayout;
@@ -45,6 +51,12 @@ public class CreateAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("CREATE NEW ACCOUNT");
+        //actionBar.setIcon(R.drawable.lock);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
         etName = findViewById(R.id.etName);
         etSurname = findViewById(R.id.etSurname);
         etEmail = findViewById(R.id.etEmail);
@@ -54,12 +66,14 @@ public class CreateAccount extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         tvLogin = findViewById(R.id.tvLogin);
 
+//        rgCampus = findViewById(R.id.rgCampus);
         switchPos = findViewById(R.id.switchPos);
         progressBarLayout = findViewById(R.id.progressBarLayout);
         contentLayout = findViewById(R.id.contentLayout);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
+
 
         //tests if there is a user already in the firebase database
 //        if(firebaseAuth.getCurrentUser() != null)
@@ -74,15 +88,15 @@ public class CreateAccount extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 //checks if the switch position state is true
-                if(isChecked)
-                {
-                    switchPos.setText(R.string.welkom_campus);
-
-                }
-                else
-                {
-                    switchPos.setText(R.string.bloemfontein_campus);
-                }
+//                if(isChecked)
+//                {
+//                    switchPos.setText(R.string.welkom_campus);
+//
+//                }
+//                else
+//                {
+//                    switchPos.setText(R.string.bloemfontein_campus);
+//                }
             }
         });
 
@@ -91,15 +105,22 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+//                StringBuffer result = new StringBuffer();
+
                 final String name = etName.getText().toString().trim();
                 final String surname = etSurname.getText().toString().trim();
                 final String email = etEmail.getText().toString().trim();
-                final String campus = switchPos.getText().toString().trim();
                 final String studentNumber = etStudentNumber.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 String confirmPassword = etConfirmPassword.getText().toString().trim();
 
-                //I still need to change these validations to be more simpler
+//                int campus = rgCampus.getCheckedRadioButtonId();
+//                rbCampusResult = findViewById(campus);
+//
+//                if(rbCampusResult != null)
+//                {
+//                    result.append("campus").append(rbCampusResult.getText().toString());
+//                }
 
                 if(TextUtils.isEmpty(name))
                 {
@@ -136,23 +157,20 @@ public class CreateAccount extends AppCompatActivity {
                 }
                 else if(password.length() < 6)
                 {
-                    etPassword.setError("Password has to be >= 6 Characters");
+                    etPassword.setError("Password has to be 6 characters or more");
                     return;
                 }
-                else if(password.equals(confirmPassword))
-                {
-                    etConfirmPassword.setHint("Passwords match");
-                }
-                else
+                else if(!etConfirmPassword.getText().toString().equals(etPassword.getText().toString()))
                 {
                     etConfirmPassword.setError("Passwords do not match");
+                    return;
                 }
+
 
                 progressBarLayout.setVisibility(View.VISIBLE);
                 contentLayout.setVisibility(View.GONE);
 
                 //will now register the use into Firebase
-
                 firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -166,24 +184,12 @@ public class CreateAccount extends AppCompatActivity {
 
                             Map<String, Object> user = new HashMap<>();
 
-                            //not sure about this switch still but i will get back to it when we start reading data from the database
-                            if(switchPos.isChecked())
-                            {
-                                String welkomCampus = "Welkom Campus";
-                                switchPos.setText(welkomCampus);
-                                user.put("campus", campus);
-                            }
-                            else
-                            {
-                                String bloemCampus = "Bloemfontein Campus";
-                                switchPos.setText(bloemCampus);
-                                user.put("campus", campus);
-                            }
 
                             user.put("name", name);
                             user.put("surname", surname);
                             user.put("email", email);
                             user.put("studentNumber", studentNumber);
+//                            user.put("campus", rbCampusResult);
 
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -200,7 +206,7 @@ public class CreateAccount extends AppCompatActivity {
                         {
                             Toast.makeText(CreateAccount.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             progressBarLayout.setVisibility(View.GONE);
-                            CreateAccount.this.recreate();
+                            startActivity(new Intent(getApplicationContext(),CreateAccount.class));
                         }
                     }
                 });
@@ -217,16 +223,5 @@ public class CreateAccount extends AppCompatActivity {
         });
 
     }
-
-//    @Override
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }
 
 }

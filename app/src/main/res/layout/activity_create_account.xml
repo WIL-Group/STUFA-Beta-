@@ -1,165 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/gradient4"
+    style="@style/authentications_layout"
     tools:context=".CreateAccount">
 
     <LinearLayout
         android:id="@+id/contentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        style="@style/content_layout">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/berkshire_swash"
-            android:text="STUFA"
-            android:textColor="@android:color/holo_orange_light"
-            android:textSize="36sp"
-            android:textStyle="bold|italic" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFirstName"
+            style="@style/til_firstname_style">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
-            android:text="Create New Account"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                style="@style/firstname_text_input_edit_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#DFD9D9"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="20dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="First Name" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLastName"
+            style="@style/til_lastname_style">
 
-        <EditText
-            android:id="@+id/etSurname"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#DFD9D9"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Last Name" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSurname"
+                style="@style/lastname_text_input_edit_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#DFD9D9"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Username/Email Address"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUserName"
+            style="@style/til_username_style">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                style="@style/username_text_input_edit_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/white"
-            android:text="Select Your Campus:"/>
+            style="@style/tv_select_your_campus"/>
+
+<!--        <RadioGroup-->
+<!--            android:id="@+id/rgCampus"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp">-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbBloemCampus"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Bloemfontein Campus"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textStyle="bold"/>-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbWelkomCampus"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Welkom Campus"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textStyle="bold"/>-->
+<!--        </RadioGroup>-->
+
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchPos"
             style="@style/switchPos"/>
 
-<!--        <Spinner-->
-<!--            android:id="@+id/sCampusName"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:background="#DFD9D9"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:layout_marginEnd="20dp" />-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilStudentNumber"
+            style="@style/til_student_number_style">
 
-        <EditText
-            android:id="@+id/etStudentNumber"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#DFD9D9"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Student Number"
-            android:ems="10"
-            android:inputType="number" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etStudentNumber"
+                style="@style/student_number_text_input_edit_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#DFD9D9"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Enter Password"
-            android:ems="10"
-            android:inputType="textPassword" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEnterPassword"
+            style="@style/til_enter_password_style">
 
-        <EditText
-            android:id="@+id/etConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#DFD9D9"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Confirm Password"
-            android:ems="10"
-            android:inputType="textPassword" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                style="@style/enter_password_text_input_edit_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilConfirmPassword"
+            style="@style/til_confirm_password_style">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPassword"
+                style="@style/confirm_password_text_input_edit_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttons"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="100dp"
-            android:textStyle="bold"
-            android:text="SIGN UP" />
+            style="@style/button_create_account"/>
 
         <TextView
             android:id="@+id/tvLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:hint="Already have an account? Login Here"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            style="@style/tv_already_have_an_account"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/progressBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
+        style="@style/progress_bar_layout">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -168,7 +121,6 @@
         android:layout_height="250dp"
         android:layout_marginTop="150dp"
         android:layout_gravity="center_horizontal" />
-
     </LinearLayout>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.stufa;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -33,6 +34,12 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("LOGIN");
+        actionBar.setIcon(R.drawable.lock);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -62,7 +69,7 @@ public class Login extends AppCompatActivity {
                 }
                 else if(password.length() < 6)
                 {
-                    etPassword.setError("Password has to be >= 6 Characters");
+                    etPassword.setError("Password has to be 6 characters or above");
                 }
 
             }
