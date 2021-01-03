@@ -6,6 +6,7 @@
     <string name="welkom_campus">Welkom Campus</string>
     <string name="bloemfontein">Bloemfontein</string>
     <string name="welkom">Welkom</string>
+    <string name="submit">SUBMIT</string>
     <string name="login">Login</string>
     <string name="sign_up">SIGN UP</string>
     <string name="student_number">Student Number</string>
@@ -14,8 +15,12 @@
     <string name="firstname">First Name</string>
     <string name="please_enter_your_username">Please Enter Your Username</string>
     <string name="please_enter_your_password">Please Enter Your Password</string>
+    <string name="please_enter_your_email_address">Please Enter Your Email Address</string>
+    <string name="password_successfully_sent_to_your_email_address">Password successfully sent to your email address</string>
     <string name="dont_have_an_account_create_one_here">Don\'t have an account? Create one here</string>
+    <string name="you_will_be_sent_a_link">You will be sent a link to your email to reset your password</string>
     <string name="username_email">Username/Email Address</string>
+    <string name="error">Error: </string>
     <string name="select_your_campus">Select your campus:</string>
     <string name="enter_password">Enter Password</string>
     <string name="confirm_password">Confirm Password</string>

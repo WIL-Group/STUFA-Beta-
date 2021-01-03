@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     Button btnLogin;
-    TextView tvCreateAccount;
+    TextView tvCreateAccount, tvForgotPassword;
     View progressBarLayout, contentLayout;
 
     ProgressBar progressBar;
@@ -44,6 +44,7 @@ public class Login extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         progressBarLayout = findViewById(R.id.progressBarLayout);
         contentLayout = findViewById(R.id.contentLayout);
@@ -109,8 +110,13 @@ public class Login extends AppCompatActivity {
 
         });
 
+        tvForgotPassword.setOnClickListener(v -> {
+
+            Intent intent = new Intent(Login.this, ForgotPassword.class);
+            startActivity(intent);
+
+        });
+
     }
 
-    public void ForgotPassword(View view) {
-    }
 }

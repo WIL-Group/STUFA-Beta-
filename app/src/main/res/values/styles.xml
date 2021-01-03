@@ -268,6 +268,48 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="iwResetPassword">
+        <item name="android:layout_width">@dimen/tvProgressbar_margin_top</item>
+        <item name="android:layout_height">@dimen/tvProgressbar_margin_top</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/buttons_margin_top</item>
+        <item name="srcCompat">@drawable/reset_password</item>
+    </style>
+
+    <style name="tv_reset_password">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/tv_margin_top</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:text">@string/you_will_be_sent_a_link</item>
+        <item name="android:textSize">@dimen/switch_margin_start</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="et_reset_password_email">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/buttons_margin_top</item>
+        <item name="android:layout_marginStart">@dimen/switch_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/switch_margin_start</item>
+        <item name="android:hint">@string/please_enter_your_email_address</item>
+        <item name="android:inputType">textEmailAddress</item>
+    </style>
+
+    <style name="button_submit">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/button_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/button_margin_start</item>
+        <item name="android:layout_marginTop">@dimen/switch_margin_start</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:text">@string/submit</item>
+        <item name="android:background">@drawable/buttons</item>
+    </style>
+
     <style name="progress_bar_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
