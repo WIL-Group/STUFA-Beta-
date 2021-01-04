@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">STUFA</string>
     <string name="stufa">STUFA</string>
     <string name="student_financial_assistance">Student Financial Assistance</string>
@@ -27,4 +28,31 @@
     <string name="already_have_an_account">Already have an account? Login in here…</string>
     <string name="welcome_to_the_student_financial_assistant_home_page">Welcome to the Student Financial Assistant Home Page</string>
     <string name="logout">Logout</string>
+    <string name="hello">Hello</string>
+    <string name="refresh_bookings">Refresh Bookings</string>
+    <string name="download">Download</string>
+    <string name="how_can_we_be_of_your_assistance">How can we be of your assistance?</string>
+    <string name="student_home">Student Home</string>
+    <string name="back">Back</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="please_choose_your_campus">Please choose your campus!</string>
+    <string name="create_a_query">Create A Query</string>
+    <string name="allowance_related_query">Allowance Related Query</string>
+    <string name="book_allowance">- Book Allowance</string>
+    <string name="meal_allowance">- Meal Allowance</string>
+    <string name="accommodation_or_transport_allowance">- Accommodation or Transport Allowance</string>
+    <string name="booking">Booking</string>
+    <string name="booking_message">- Create a face-to-face booking for any complex/related queries</string>
+    <string name="general_query">General Query</string>
+    <string name="general_query_message">- Any complex queries besides the ones mentioned above with clear explanations</string>
+    <string name="create_a_request">Create A Request</string>
+    <string name="financial_statement">Financial Statement</string>
+    <string name="this_allows_statement">- This allows the Student to access and download their financial statement</string>
+    <string name="financial_clearance">Financial Clearance</string>
+    <string name="this_allows_clearance">- This allows the Student to request financial clearance</string>
+    <string name="fill_form">Fill in a form</string>
+    <string name="this_allows_fill_form">- This allows the Student to fill in a form</string>
+
+
 </resources>

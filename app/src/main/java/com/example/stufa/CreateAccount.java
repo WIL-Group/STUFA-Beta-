@@ -8,15 +8,12 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +33,6 @@ public class CreateAccount extends AppCompatActivity {
     EditText etName, etSurname, etEmail, etStudentNumber, etPassword, etConfirmPassword;
     Button btnSignUp;
     TextView tvLogin;
-//    RadioGroup rgCampus;
-//    RadioButton rbCampusResult;
 
     SwitchCompat switchPos;
     View progressBarLayout, contentLayout;
@@ -52,8 +47,7 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("CREATE NEW ACCOUNT");
-        //actionBar.setIcon(R.drawable.lock);
+        actionBar.setTitle(getString(R.string.create_new_account));
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
@@ -66,7 +60,6 @@ public class CreateAccount extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         tvLogin = findViewById(R.id.tvLogin);
 
-//        rgCampus = findViewById(R.id.rgCampus);
         switchPos = findViewById(R.id.switchPos);
         progressBarLayout = findViewById(R.id.progressBarLayout);
         contentLayout = findViewById(R.id.contentLayout);
@@ -78,7 +71,7 @@ public class CreateAccount extends AppCompatActivity {
         //tests if there is a user already in the firebase database
 //        if(firebaseAuth.getCurrentUser() != null)
 //        {
-//            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//            startActivity(new Intent(getApplicationContext(),StudentHomePage.class));
 //            finish();
 //        }
 
@@ -87,16 +80,16 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                //checks if the switch position state is true
-//                if(isChecked)
-//                {
-//                    switchPos.setText(R.string.welkom_campus);
-//
-//                }
-//                else
-//                {
-//                    switchPos.setText(R.string.bloemfontein_campus);
-//                }
+             //checks if the switch position state is true
+               if(isChecked)
+               {
+                   switchPos.setText(R.string.welkom_campus);
+
+               }
+               else
+               {
+                   switchPos.setText(R.string.bloemfontein_campus);
+               }
             }
         });
 
@@ -105,22 +98,13 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                StringBuffer result = new StringBuffer();
-
                 final String name = etName.getText().toString().trim();
                 final String surname = etSurname.getText().toString().trim();
                 final String email = etEmail.getText().toString().trim();
                 final String studentNumber = etStudentNumber.getText().toString().trim();
+                final String campus = switchPos.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 String confirmPassword = etConfirmPassword.getText().toString().trim();
-
-//                int campus = rgCampus.getCheckedRadioButtonId();
-//                rbCampusResult = findViewById(campus);
-//
-//                if(rbCampusResult != null)
-//                {
-//                    result.append("campus").append(rbCampusResult.getText().toString());
-//                }
 
                 if(TextUtils.isEmpty(name))
                 {
@@ -138,11 +122,13 @@ public class CreateAccount extends AppCompatActivity {
                     return;
                 }
 
-//                else if(TextUtils.isEmpty(campus))
-//                {
-//                    etCampas.setError("Campus name is Required");
-//                    return;
-//                }
+                else if(TextUtils.isEmpty(campus))
+                {
+                    Toast.makeText(CreateAccount.this,
+                            getString(R.string.please_choose_your_campus),
+                            Toast.LENGTH_SHORT).show();;
+                    return;
+                }
 
                 else if(TextUtils.isEmpty(studentNumber))
                 {
@@ -189,7 +175,7 @@ public class CreateAccount extends AppCompatActivity {
                             user.put("surname", surname);
                             user.put("email", email);
                             user.put("studentNumber", studentNumber);
-//                            user.put("campus", rbCampusResult);
+                            user.put("campus", campus);
 
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -199,7 +185,7 @@ public class CreateAccount extends AppCompatActivity {
 
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), StudentHomePage.class));
                             CreateAccount.this.finish();
                         }
                         else //if the user already exists in the database an error message will show
@@ -222,6 +208,24 @@ public class CreateAccount extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.forgot_password, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.back) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

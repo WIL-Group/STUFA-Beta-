@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("LOGIN");
+        actionBar.setTitle(getString(R.string.login));
         actionBar.setIcon(R.drawable.lock);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
                         if(task.isSuccessful())
                         {
                             Toast.makeText(Login.this, "Successfully Logged In!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), StudentHomePage.class));
 
                         }
                         else

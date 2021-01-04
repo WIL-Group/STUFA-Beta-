@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StudentHomePage">
+
+    <LinearLayout
+        android:id="@+id/greeting_layout"
+        style="@style/greeting">
+
+        <TextView
+            android:id="@+id/tvGreeting"
+            style="@style/tv_greeting" />
+
+        <TextView
+            android:id="@+id/tvFullName"
+            style="@style/tv_fullname"
+
+            android:text="Kgotso Matjato"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/tv_assistance"/>
+
+    <TextView
+        android:id="@+id/tvBookingPercentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:text="Bookings are at 78% full capacity(for accurate percentage, click the refresh tab above on the tab)"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="3">
+
+        <fragment
+            android:id="@+id/announcements_list_frag"
+            android:name="com.example.stufa.AnnouncementsListFrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout="@layout/announcements_fragment_list" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <fragment
+            android:id="@+id/create_query_frag"
+            android:name="com.example.stufa.CreateQueryFrag"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/create_request_frag"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_create_query" />
+
+        <fragment
+            android:id="@+id/create_request_frag"
+            android:name="com.example.stufa.CreateRequestFrag"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/create_query_frag"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_create_request" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--    <TextView-->
+<!--        android:id="@+id/tvStudentNumber"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:textSize="18sp"-->
+<!--        android:text="TextView" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvEmail"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:textSize="18sp"-->
+<!--        android:text="TextView" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvCourse"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:textSize="18sp"-->
+<!--        android:text="TextView"/>-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/btnLogout"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@drawable/buttons"-->
+<!--        android:layout_marginStart="100dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginEnd="100dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="@string/logout"-->
+<!--        android:onClick="Logout"/>-->
+
+</LinearLayout>

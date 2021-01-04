@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +27,6 @@ public class ForgotPassword extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
-    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,8 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("RESET YOUR PASSWORD");
-        //actionBar.setIcon(R.drawable.lock);
+        actionBar.setTitle(getString(R.string.reset_password));
+        actionBar.setIcon(R.drawable.reset_password);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
@@ -46,36 +48,63 @@ public class ForgotPassword extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
-        progressBarLayout.setVisibility(View.VISIBLE);
-        contentLayout.setVisibility(View.GONE);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                firebaseAuth.sendPasswordResetEmail(etResetEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                if(etResetEmail.getText().toString().isEmpty())
+                {
+                    Toast.makeText(ForgotPassword.this, getString(R.string.please_enter_your_email_address), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    progressBarLayout.setVisibility(View.VISIBLE);
+                    contentLayout.setVisibility(View.GONE);
+                    firebaseAuth.sendPasswordResetEmail(etResetEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 
-                        if(task.isSuccessful())
-                        {
-                            progressBarLayout.setVisibility(View.GONE);
-                            contentLayout.setVisibility(View.VISIBLE);
-                            Toast.makeText(ForgotPassword.this, getString
-                                    (R.string.password_successfully_sent_to_your_email_address),
-                                    Toast.LENGTH_LONG).show();
+
+                            if(task.isSuccessful())
+                            {
+                                progressBarLayout.setVisibility(View.GONE);
+                                contentLayout.setVisibility(View.VISIBLE);
+                                Toast.makeText(ForgotPassword.this, getString
+                                                (R.string.password_successfully_sent_to_your_email_address),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            {
+                                progressBarLayout.setVisibility(View.GONE);
+                                contentLayout.setVisibility(View.VISIBLE);
+                                Toast.makeText(ForgotPassword.this, getString
+                                                (R.string.error) + task.getException().getMessage(),
+                                        Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else
-                        {
-                            progressBarLayout.setVisibility(View.GONE);
-                            contentLayout.setVisibility(View.VISIBLE);
-                            Toast.makeText(ForgotPassword.this, getString
-                                            (R.string.error) + task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                    });
+                }
+
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.forgot_password, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.back) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
