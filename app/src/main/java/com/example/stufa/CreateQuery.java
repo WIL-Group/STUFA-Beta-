@@ -7,37 +7,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.EditText;
 
-public class CreateBooking extends AppCompatActivity {
+public class CreateQuery extends AppCompatActivity {
 
-    CheckBox cbQueryRelatedBooking, cbGeneralBooking, cbRequestRelatedBooking;
-    Button btnCreate, btnDelete, btnSubmit;
-    TextView tvNameAndSurname, tvBookingType, tvDateCreated;
-
+    CheckBox cbBookAllowance, cbMealAllowance, cbAccomodationOrTransportAllowance;
+    EditText etQueryMessage;
+    Button btnSave, btnDelete, btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_booking);
+        setContentView(R.layout.activity_create_query);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getString(R.string.booking));
-        actionBar.setIcon(R.drawable.booking);
+        actionBar.setTitle(getString(R.string.create_a_query));
+        actionBar.setIcon(R.drawable.query);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        cbQueryRelatedBooking = findViewById(R.id.cbQueryRelatedBooking);
-        cbGeneralBooking = findViewById(R.id.cbGeneralBooking);
-        cbRequestRelatedBooking = findViewById(R.id.cbRequestRelatedBooking);
-        btnCreate = findViewById(R.id.btnCreate);
+        cbBookAllowance = findViewById(R.id.cbBookAllowance);
+        cbMealAllowance = findViewById(R.id.cbMealAllowance);
+        cbAccomodationOrTransportAllowance = findViewById(R.id.cbAccomodationOrTransportAllowance);
+        etQueryMessage = findViewById(R.id.etQueryMessage);
+        btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
         btnSubmit = findViewById(R.id.btnSubmit);
-        tvNameAndSurname = findViewById(R.id.tvNameAndSurname);
-        tvBookingType = findViewById(R.id.tvBookingType);
-        tvDateCreated = findViewById(R.id.tvDateCreated);
 
-        btnCreate.setOnClickListener(new View.OnClickListener() {
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -57,6 +55,7 @@ public class CreateBooking extends AppCompatActivity {
 
             }
         });
+
 
     }
 }

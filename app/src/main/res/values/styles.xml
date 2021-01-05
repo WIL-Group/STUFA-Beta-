@@ -381,8 +381,10 @@
     </style>
 
     <style name="btn_allowance_related">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/message_text_size</item>
+        <item name="android:layout_marginEnd">@dimen/message_text_size</item>
         <item name="android:layout_marginTop">@dimen/switch_padding</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
@@ -425,8 +427,10 @@
     </style>
 
     <style name="btn_booking_style">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/message_text_size</item>
+        <item name="android:layout_marginEnd">@dimen/message_text_size</item>
         <item name="android:layout_marginTop">@dimen/margin_top</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
@@ -447,8 +451,10 @@
 
 
     <style name="btn_general_query_style">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/message_text_size</item>
+        <item name="android:layout_marginEnd">@dimen/message_text_size</item>
         <item name="android:layout_marginTop">@dimen/margin_top</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
@@ -479,8 +485,10 @@
     </style>
 
     <style name="btn_financial_statement_style">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/message_text_size</item>
+        <item name="android:layout_marginEnd">@dimen/message_text_size</item>
         <item name="android:layout_marginTop">@dimen/margin_top</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
@@ -501,8 +509,10 @@
 
 
     <style name="btn_financial_clearance_style">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/message_text_size</item>
+        <item name="android:layout_marginEnd">@dimen/message_text_size</item>
         <item name="android:layout_marginTop">@dimen/margin_top</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
@@ -523,8 +533,10 @@
     </style>
 
     <style name="btn_fill_form_style">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/message_text_size</item>
+        <item name="android:layout_marginEnd">@dimen/message_text_size</item>
         <item name="android:layout_marginTop">@dimen/margin_top</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>

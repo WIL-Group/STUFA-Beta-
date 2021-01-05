@@ -49,7 +49,7 @@ public class StudentHomePage extends AppCompatActivity {
 //        tvCourse = findViewById(R.id.tvCourse);
         btnAllowanceRelatedQuery = findViewById(R.id.btnAllowanceRelatedQuery);
         btnBooking = findViewById(R.id.btnBooking);
-        btnGeneralQuery = findViewById(R.id.btnGeneralQuery);
+//        btnGeneralQuery = findViewById(R.id.btnGeneralQuery);
         btnFinancialStatement = findViewById(R.id.btnFinancialStatement);
         btnFinancialClearance = findViewById(R.id.btnFinancialClearance);
         btnFillForm = findViewById(R.id.btnFillForm);
@@ -80,7 +80,7 @@ public class StudentHomePage extends AppCompatActivity {
         btnAllowanceRelatedQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentHomePage.this, CreateAllowanceQuery.class);
+                Intent intent = new Intent(StudentHomePage.this, CreateQuery.class);
                 startActivity(intent);
             }
         });
@@ -93,13 +93,13 @@ public class StudentHomePage extends AppCompatActivity {
             }
         });
 
-        btnGeneralQuery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StudentHomePage.this, CreateAllowanceQuery.class);
-                startActivity(intent);
-            }
-        });
+//        btnGeneralQuery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(StudentHomePage.this, CreateQuery.class);
+//                startActivity(intent);
+//            }
+//        });
 
         btnFinancialStatement.setOnClickListener(new View.OnClickListener() {
             @Override

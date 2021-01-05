@@ -12,7 +12,7 @@
         <activity android:name=".FillForm"></activity>
         <activity android:name=".CreateRequest" />
         <activity android:name=".CreateBooking" />
-        <activity android:name=".CreateAllowanceQuery" />
+        <activity android:name=".CreateQuery" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".CreateAccount" />
         <activity android:name=".StudentHomePage" />

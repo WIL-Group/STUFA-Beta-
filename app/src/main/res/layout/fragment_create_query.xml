@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/holo_green_dark"
     tools:context=".CreateQueryFrag">
 
     <TextView
@@ -26,6 +27,10 @@
         android:id="@+id/textView8"
         style="@style/tv_accomodation_allowances"/>
 
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/tv_general_query_message"/>
+
     <Button
         android:id="@+id/btnBooking"
         style="@style/btn_booking_style" />
@@ -34,11 +39,9 @@
         android:id="@+id/textView9"
         style="@style/tv_booking_message_style"/>
 
-    <Button
-        android:id="@+id/btnGeneralQuery"
-        style="@style/btn_general_query_style"  />
+<!--    <Button-->
+<!--        android:id="@+id/btnGeneralQuery"-->
+<!--        style="@style/btn_general_query_style"  />-->
 
-    <TextView
-        android:id="@+id/textView12"
-        style="@style/tv_general_query_message"/>
+
 </LinearLayout>
