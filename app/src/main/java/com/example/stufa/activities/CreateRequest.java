@@ -1,4 +1,4 @@
-package com.example.stufa;
+package com.example.stufa.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+
+import com.example.stufa.R;
 
 public class CreateRequest extends AppCompatActivity {
 

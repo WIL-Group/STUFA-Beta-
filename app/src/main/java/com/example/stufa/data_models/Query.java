@@ -1,4 +1,4 @@
-package com.example.stufa;
+package com.example.stufa.data_models;
 
 public class Query {
 

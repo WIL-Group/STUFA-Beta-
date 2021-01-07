@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/holo_blue_dark"
-    tools:context=".CreateRequestFrag">
+    tools:context=".fragments.CreateRequestFrag">
 
     <TextView
         android:id="@+id/textView13"

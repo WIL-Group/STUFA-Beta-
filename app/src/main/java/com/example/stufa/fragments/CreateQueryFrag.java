@@ -1,4 +1,4 @@
-package com.example.stufa;
+package com.example.stufa.fragments;
 
 import android.os.Bundle;
 
@@ -8,24 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.stufa.R;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the  factory method to
  * create an instance of this fragment.
  */
-public class CreateRequestFrag extends Fragment {
+public class CreateQueryFrag extends Fragment {
 
-
-
-    public CreateRequestFrag() {
+    public CreateQueryFrag() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_request, container, false);
+        return inflater.inflate(R.layout.fragment_create_query, container, false);
     }
 }

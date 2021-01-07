@@ -1,4 +1,4 @@
-package com.example.stufa;
+package com.example.stufa.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +12,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.stufa.data_models.Query;
+import com.example.stufa.app_utilities.QueryAdapter;
+import com.example.stufa.R;
+
 import java.util.ArrayList;
 
-public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemClicked  {
+public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemClicked {
 
     CheckBox cbBookAllowance, cbMealAllowance, cbAccommodationOrTransportAllowance;
     EditText etQueryMessage;

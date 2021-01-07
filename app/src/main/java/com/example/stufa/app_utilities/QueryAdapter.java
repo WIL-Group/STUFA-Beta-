@@ -1,10 +1,13 @@
-package com.example.stufa;
+package com.example.stufa.app_utilities;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.stufa.R;
+import com.example.stufa.data_models.Query;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

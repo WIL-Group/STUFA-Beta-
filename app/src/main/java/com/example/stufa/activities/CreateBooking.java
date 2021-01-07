@@ -1,4 +1,4 @@
-package com.example.stufa;
+package com.example.stufa.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.example.stufa.R;
 
 public class CreateBooking extends AppCompatActivity {
 

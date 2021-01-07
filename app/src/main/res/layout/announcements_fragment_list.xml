@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@android:color/holo_purple"
-    tools:context=".AnnouncementsListFrag">
+    tools:context=".fragments.AnnouncementsListFrag">
 
 
     <androidx.recyclerview.widget.RecyclerView
