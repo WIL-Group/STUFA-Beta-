@@ -53,8 +53,7 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
 
         layoutManager = new LinearLayoutManager(CreateQuery.this);
         recyclerView.setLayoutManager(layoutManager);
-        myAdapter = new QueryAdapter(queries,CreateQuery.this);
-        recyclerView.setAdapter(myAdapter);
+
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +83,10 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
 
                     query = new Query(type, message);
                     queries.add(query);
-                    Toast.makeText(CreateQuery.this, "Query succesfully added", Toast.LENGTH_SHORT).show();
+
+                    myAdapter = new QueryAdapter(queries,CreateQuery.this);
+                    recyclerView.setAdapter(myAdapter);
+                    Toast.makeText(CreateQuery.this, "Query successfully added", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -96,7 +98,16 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(query == null)
+                {
+                    Toast.makeText(CreateQuery.this,"Please select a query to delete", Toast.LENGTH_SHORT);
+                }
+                else
+                {
+                    queries.remove(query);
+                }
+                myAdapter = new QueryAdapter(queries,CreateQuery.this);
+                recyclerView.setAdapter(myAdapter);
             }
         });
 
@@ -111,6 +122,7 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
 
     @Override
     public void onItemClicked(int index) {
+        query = queries.get(index);
 
     }
 }
