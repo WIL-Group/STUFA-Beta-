@@ -25,4 +25,7 @@ public class Query {
     public void setMessage(String message) {
         Message = message;
     }
+
+    public Query() {
+    }
 }
