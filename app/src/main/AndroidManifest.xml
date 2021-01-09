@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.STUFA">
-        <activity android:name=".activities.AnnouncementPost"></activity>
         <activity android:name=".activities.AnnouncementBrowsing" />
         <activity android:name=".activities.FillForm" />
         <activity android:name=".activities.CreateRequest" />

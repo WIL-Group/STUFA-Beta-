@@ -13,11 +13,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Utilities
 {
     public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static List<Announcement> DataCache = new ArrayList<>();
 
     public static void show(Context c, String message){
         Toast.makeText(c, message, Toast.LENGTH_SHORT).show();

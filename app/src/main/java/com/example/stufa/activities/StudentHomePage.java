@@ -1,10 +1,5 @@
 package com.example.stufa.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +17,13 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 public class StudentHomePage extends AppCompatActivity {
 
     Button btnLogout, btnAllowanceRelatedQuery, btnBooking, btnGeneralQuery,
@@ -30,6 +32,8 @@ public class StudentHomePage extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
     String userID;
+    FragmentManager fragmentManager;
+    Fragment listFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,12 @@ public class StudentHomePage extends AppCompatActivity {
         btnFinancialClearance = findViewById(R.id.btnFinancialClearance);
         btnFillForm = findViewById(R.id.btnFillForm);
         tvBookingPercentage = findViewById(R.id.tvBookingPercentage);
+
+        fragmentManager = getSupportFragmentManager();
+
+        listFrag = fragmentManager.findFragmentById(R.id.announcements_list_frag);
+
+        fragmentManager.beginTransaction().show(listFrag).commit();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();

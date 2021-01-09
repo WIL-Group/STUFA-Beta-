@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +19,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.ViewHolder>
+    implements Filterable
 {
-    private List<Announcement> announcements;
+    public List<Announcement> announcements;
     private int index;
+    private List<Announcement> filterList;
+    private FilterHelper filterHelper;
 
     //Just testing
     private final Context c;
+
+    @Override
+    public Filter getFilter() {
+        if(filterHelper==null){
+            filterHelper = FilterHelper.newInstance(filterList,this);
+        }
+        return filterHelper;
+    }
+
     interface ItemClickListener {
         void onItemClick(int pos);
     }
@@ -31,6 +45,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     {
         this.c = context;
         announcements = list;
+        this.filterList = announcements;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements
