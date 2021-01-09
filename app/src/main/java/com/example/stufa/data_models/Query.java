@@ -3,11 +3,14 @@ package com.example.stufa.data_models;
 public class Query {
 
     String type;
-    String Message;
+    String message;
+    String qId;
 
-    public Query(String type, String message) {
+    public Query(String type, String message, String qid) {
         this.type = type;
-        Message = message;
+        this.message = message;
+        this.qId = qid;
+
     }
 
     public String getType() {
@@ -19,11 +22,19 @@ public class Query {
     }
 
     public String getMessage() {
-        return Message;
+        return message;
     }
 
     public void setMessage(String message) {
-        Message = message;
+        this.message = message;
+    }
+
+    public String getqId() {
+        return qId;
+    }
+
+    public void setqId(String qId) {
+        this.qId = qId;
     }
 
     public Query() {

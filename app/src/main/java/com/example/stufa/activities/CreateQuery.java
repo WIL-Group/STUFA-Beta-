@@ -52,8 +52,10 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
     RecyclerView.LayoutManager layoutManager;
     private ArrayList<Query> queries;
     Query query;
-    String type, message, userID;
-    DatabaseReference queryReff;
+    String type, message,qId;
+    DatabaseReference queryReff,submittedQueryReff;
+    com.google.firebase.database.Query query1;
+
 
 
 
@@ -106,6 +108,7 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CreateQuery.this, "Error!" + error, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -114,36 +117,28 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
             insertData();
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(query == null)
-                {
-                    Toast.makeText(CreateQuery.this,"Please select a query to delete", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    queryReff = FirebaseDatabase.getInstance().getReference("saved_queries").child("");
-                    Task<Void> mTask = queryReff.removeValue();
-
-                    mTask.addOnSuccessListener(aVoid ->
-                            Toast.makeText(CreateQuery.this, "Removed!",Toast.LENGTH_LONG).show()).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(CreateQuery.this,"Failed! ", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    queries.remove(query);
-                }
-                myAdapter = new QueryAdapter(queries,CreateQuery.this);
-                recyclerView.setAdapter(myAdapter);
+        btnDelete.setOnClickListener(v -> {
+            if(query == null)
+            {
+                Toast.makeText(CreateQuery.this,"Please select a query to delete", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+               deleteData();
             }
         });
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        btnSubmit.setOnClickListener(v -> {
+            if(query != null)
+            {
+                submittedQueryReff = FirebaseDatabase.getInstance().getReference().child("submitted_queries");
+                submittedQueryReff.push().setValue(query);
+                deleteData();
+                Toast.makeText(CreateQuery.this, "Query " + query.getqId() + " successfully submitted!", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(CreateQuery.this, "Please select query from the list!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -152,7 +147,6 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
     @Override
     public void onItemClicked(int index) {
         query = queries.get(index);
-
     }
 
     public void insertData()
@@ -168,11 +162,10 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
             else
             {
                 message = etQueryMessage.getText().toString().trim();
-                query = new Query(type, message);
-                queries.add(query);
+                qId = queries.size()+message.charAt(2) + "";
+                query = new Query(type, message,qId);
                 queryReff.push().setValue(query);
-                myAdapter = new QueryAdapter(queries,CreateQuery.this);
-                recyclerView.setAdapter(myAdapter);
+                Toast.makeText(CreateQuery.this, "Query successfully added", Toast.LENGTH_SHORT).show();
             }
         }
         else if(cbMealAllowance.isChecked())
@@ -186,8 +179,8 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
             else
             {
                 message = etQueryMessage.getText().toString().trim();
-
-                query = new Query(type, message);
+                qId = queries.size()+message.charAt(2) + "";
+                query = new Query(type, message,qId);
                 queryReff.push().setValue(query);
                 Toast.makeText(CreateQuery.this, "Query successfully added", Toast.LENGTH_SHORT).show();
             }
@@ -202,10 +195,9 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
             else
             {
                 message = etQueryMessage.getText().toString().trim();
-
-                query = new Query(type, message);
+                qId = queries.size()+message.charAt(2) + "";
+                query = new Query(type, message,qId);
                 queryReff.push().setValue(query);
-
                 Toast.makeText(CreateQuery.this, "Query successfully added", Toast.LENGTH_SHORT).show();
             }
         }
@@ -214,5 +206,29 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
             Toast.makeText(CreateQuery.this,"Please select one of the boxes",Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public  void deleteData()
+    {
+        String toDelete = query.getqId();
+
+        query1 = queryReff.orderByChild("qId").equalTo(toDelete);
+        query1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren())
+                {
+                    ds.getRef().removeValue();
+                }
+                Toast.makeText(CreateQuery.this, query.getqId()+" Removed!",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CreateQuery.this, "Error! " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queries.remove(query);
     }
 }
