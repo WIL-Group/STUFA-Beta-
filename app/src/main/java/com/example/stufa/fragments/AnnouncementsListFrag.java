@@ -12,6 +12,7 @@ import com.example.stufa.app_utilities.FirebaseCRUDHelper;
 import com.example.stufa.app_utilities.Utilities;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class AnnouncementsListFrag extends Fragment {
         layoutManager = new LinearLayoutManager(this.getActivity(),LinearLayoutManager.HORIZONTAL,false);
         rv.setLayoutManager(layoutManager);
         adapter= new AnnouncementAdapter(this.getActivity(), Utilities.DataCache);
+        crudHelper.select((AppCompatActivity) this.getActivity().getApplicationContext(), Utilities.getDatabaseRefence(), rv,adapter);
         rv.setAdapter(adapter);
 
     }

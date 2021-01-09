@@ -28,6 +28,7 @@ public class AnnouncementBrowsing extends AppCompatActivity {
 //        mProgressBar = findViewById(R.id.mProgressBarLoad);
 //        mProgressBar.setIndeterminate(true);
 //        Utils.showProgressBar(mProgressBar);
+
         rv = findViewById(R.id.aList);
         layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
@@ -35,6 +36,7 @@ public class AnnouncementBrowsing extends AppCompatActivity {
                 layoutManager.getOrientation());
         rv.addItemDecoration(dividerItemDecoration);
         adapter= new AnnouncementAdapter(this, Utilities.DataCache);
+        crudHelper.select(this, Utilities.getDatabaseRefence(), rv,adapter);
         rv.setAdapter(adapter);
     }
 
