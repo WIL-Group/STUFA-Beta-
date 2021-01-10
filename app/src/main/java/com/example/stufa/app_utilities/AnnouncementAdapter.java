@@ -98,7 +98,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.itemTvTitle.setText(announcements.get(i).getTitle());
         holder.itemTvName.setText(announcements.get(i).getStaff().getFirstName()
         + " " + announcements.get(i).getStaff().getLastName());
-        if (announcements.get(i).isViewed() == true)
+        if (announcements.get(i).isViewed())
         {
             holder.itemIvView.setImageResource(R.drawable.viewed);
         }
