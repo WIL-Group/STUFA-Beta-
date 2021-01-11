@@ -43,21 +43,20 @@
         android:layout_marginTop="10dp"
         android:layout_weight="3">
 
-        <fragment
-            android:id="@+id/announcements_list_frag"
-            android:name="com.example.stufa.fragments.AnnouncementsListFrag"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAnnounce"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
+            android:background="@color/purple_200"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout="@layout/announcements_fragment_list" />
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,10 +15,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stufa.R;
+import com.example.stufa.app_utilities.Utilities;
+import com.example.stufa.data_models.Announcement;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
 
@@ -29,6 +38,10 @@ public class Login extends AppCompatActivity {
 
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
+
+    DatabaseReference databaseReference;
+    ArrayList<Announcement> announcements;
+    Announcement announcement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +60,16 @@ public class Login extends AppCompatActivity {
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
+        announcements = new ArrayList<>();
+
         progressBarLayout = findViewById(R.id.progressBarLayout);
         contentLayout = findViewById(R.id.contentLayout);
 
         progressBar = findViewById(R.id.progressBar);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        readData(list -> Utilities.DataCache = list);
+
 
         btnLogin.setOnClickListener(v -> {
 
@@ -117,6 +135,35 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
 
         });
+
+    }
+
+    private void readData(FirebaseCallBack firebaseCallBack)
+    {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Announcements");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren())
+                {
+                    announcement = ds.getValue(Announcement.class);
+                    announcement.setMessage("");
+                    announcements.add(announcement);
+                }
+
+                firebaseCallBack.onCallBack(announcements);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private interface FirebaseCallBack
+    {
+        void onCallBack(ArrayList<Announcement> list);
 
     }
 

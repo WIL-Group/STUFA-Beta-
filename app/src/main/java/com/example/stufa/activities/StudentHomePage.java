@@ -10,7 +10,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stufa.R;
+import com.example.stufa.app_utilities.AnnouncementAdapter;
+import com.example.stufa.app_utilities.QueryAdapter;
+import com.example.stufa.app_utilities.Utilities;
+import com.example.stufa.data_models.Announcement;
+import com.example.stufa.data_models.Booking;
+import com.example.stufa.data_models.Query;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -23,8 +34,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class StudentHomePage extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+public class StudentHomePage extends AppCompatActivity implements AnnouncementAdapter.ItemClickListener
+{
 
     Button btnLogout, btnAllowanceRelatedQuery, btnBooking, btnGeneralQuery,
            btnFinancialStatement, btnFinancialClearance, btnFillForm;
@@ -33,7 +52,15 @@ public class StudentHomePage extends AppCompatActivity {
     FirebaseFirestore firestore;
     String userID;
     FragmentManager fragmentManager;
-    Fragment listFrag;
+    RecyclerView rView;
+    int totalNumberOfBookings;
+    DatabaseReference databaseReference;
+    ArrayList<Announcement> announcements;
+    ArrayList<Booking> bookings;
+    Announcement announcement;
+    AnnouncementAdapter adapter;
+    Booking booking;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +89,7 @@ public class StudentHomePage extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
 
-        listFrag = fragmentManager.findFragmentById(R.id.announcements_list_frag);
-
-        fragmentManager.beginTransaction().show(listFrag).commit();
+        rView = findViewById(R.id.rvAnnounce);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -87,6 +112,22 @@ public class StudentHomePage extends AppCompatActivity {
 //                tvStudentNumber.setText(String.format("%s%s",  "Student Number: ", value.getString("studentNumber")));
             }
         });
+        rView.setHasFixedSize(true);
+        announcements = new ArrayList<>();
+        bookings = new ArrayList<>();
+
+        for(int i = 0; i < Utilities.DataCache.size(); i++)
+        {
+            announcement = Utilities.DataCache.get(i);
+            announcements.add(announcement);
+        }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rView.setLayoutManager(layoutManager);
+
+        adapter = new AnnouncementAdapter(StudentHomePage.this,announcements);
+        rView.setAdapter(adapter);
+
+        readData(list -> totalNumberOfBookings = list.size());
 
         btnAllowanceRelatedQuery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,12 +179,6 @@ public class StudentHomePage extends AppCompatActivity {
 
     }
 
-//    //Logs out the use and sends them to the Login Activity
-//    public void Logout(View view) {
-//        FirebaseAuth.getInstance().signOut();//used for logging out the user
-//        startActivity(new Intent(getApplicationContext(), Login.class));
-//        finish();
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -173,5 +208,41 @@ public class StudentHomePage extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onItemClick(int pos) {
+
+        Intent intent = new Intent(StudentHomePage.this, AnnouncementBrowsing.class);
+        startActivity(intent);
+
+    }
+
+    private  void readData(FireBaseCallBack fireBaseCallBack)
+    {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("bookings");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bookings.clear();
+                for(DataSnapshot ds : snapshot.getChildren())
+                {
+                    booking = ds.getValue(Booking.class);
+                    bookings.add(booking);
+                }
+                fireBaseCallBack.onCallBack(bookings);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Utilities.show(StudentHomePage.this, "ERROR! " + error);
+            }
+        });
+    }
+    private  interface FireBaseCallBack
+    {
+        void onCallBack(ArrayList<Booking> list);
+    }
+
+
 
 }

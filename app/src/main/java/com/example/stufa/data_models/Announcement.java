@@ -9,19 +9,17 @@ public class Announcement implements Serializable
 {
     private String title;
     private String message;
-    private Date date;
+    private String date;
     private boolean viewed;
-    private Staff staff;
     private String key;
 
     public Announcement() {
     }
 
-    public Announcement(String title, String message, Date date, Staff staff) {
+    public Announcement(String title, String message, String date) {
         this.title = title;
         this.message = message;
         this.date = date;
-        this.staff = staff;
     }
 
     public String getTitle() {
@@ -40,11 +38,11 @@ public class Announcement implements Serializable
         this.message = message;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -54,14 +52,6 @@ public class Announcement implements Serializable
 
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
-    }
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
     }
 
     @Exclude

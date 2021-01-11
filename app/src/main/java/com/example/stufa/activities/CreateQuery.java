@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.stufa.R;
 import com.example.stufa.app_utilities.QueryAdapter;
+import com.example.stufa.data_models.Announcement;
 import com.example.stufa.data_models.Query;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,8 +37,11 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -53,12 +57,9 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
     private ArrayList<Query> queries;
     Query query;
     String type, message,qId;
-    DatabaseReference queryReff,submittedQueryReff;
+    DatabaseReference queryReff,submittedQueryReff,databaseReference;
     com.google.firebase.database.Query query1;
-
-
-
-
+    private String date;
 
 
     @Override
@@ -87,34 +88,17 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
 
         layoutManager = new LinearLayoutManager(CreateQuery.this);
         recyclerView.setLayoutManager(layoutManager);
-        myAdapter = new QueryAdapter(queries,CreateQuery.this);
-        recyclerView.setAdapter(myAdapter);
 
-        queryReff = FirebaseDatabase.getInstance().getReference().child("saved_queries");
 
-        queryReff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                queries.clear();
-
-                for(DataSnapshot ds : snapshot.getChildren())
-                {
-                    query = ds.getValue(Query.class);
-                    queries.add(query);
-                }
-                myAdapter = new QueryAdapter(queries,CreateQuery.this);
-                recyclerView.setAdapter(myAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(CreateQuery.this, "Error!" + error, Toast.LENGTH_SHORT).show();
-
-            }
-        });
+       readData(list -> {
+           myAdapter = new QueryAdapter(list,CreateQuery.this);
+           recyclerView.setAdapter(myAdapter);
+       });
 
         btnSave.setOnClickListener(v -> {
             insertData();
+
+
         });
 
         btnDelete.setOnClickListener(v -> {
@@ -230,5 +214,35 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
         });
 
         queries.remove(query);
+    }
+
+    private void readData(FireBaseCallBack fireBaseCallBack)
+    {
+        queryReff = FirebaseDatabase.getInstance().getReference().child("saved_queries");
+
+        queryReff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                queries.clear();
+
+                for(DataSnapshot ds : snapshot.getChildren())
+                {
+                    query = ds.getValue(Query.class);
+                    queries.add(query);
+                }
+                fireBaseCallBack.onCallBack(queries);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CreateQuery.this, "Error!" + error, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private interface FireBaseCallBack
+    {
+        void onCallBack(ArrayList<Query> list);
     }
 }
