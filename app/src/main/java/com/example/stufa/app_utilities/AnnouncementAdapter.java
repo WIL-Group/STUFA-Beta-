@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.ViewHolder>
@@ -50,19 +51,32 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     }
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull AnnouncementAdapter.ViewHolder holder, int i) {
         //get the current announcement
-
+        holder.itemView.setTag(announcements.get(i));
         holder.itemTvTitle.setText(announcements.get(i).getTitle());
         holder.itemTvName.setText("Thabo");
         if (announcements.get(i).isViewed())
         {
             holder.itemIvView.setImageResource(R.drawable.viewed);
+            holder.itemCardView.setBackgroundColor(R.color.white);
+           /* holder.itemIvView.setBackgroundColor(R.color.white);
+            holder.itemMessage.setBackgroundColor(R.color.white);
+            holder.itemTvName.setBackgroundColor(R.color.white);
+            holder.itemTvDate.setBackgroundColor(R.color.white);
+            holder.itemTvTitle.setBackgroundColor(R.color.white);*/
         }
         else
         {
             holder.itemIvView.setImageResource(R.drawable.not_viewed);
+            holder.itemCardView.setBackgroundColor(R.color.light_yellow);
+           /* holder.itemIvView.setBackgroundColor(R.color.light_yellow);
+            holder.itemMessage.setBackgroundColor(R.color.light_yellow);
+            holder.itemTvName.setBackgroundColor(R.color.light_yellow);
+            holder.itemTvDate.setBackgroundColor(R.color.light_yellow);
+            holder.itemTvTitle.setBackgroundColor(R.color.light_yellow);*/
         }
         holder.itemMessage.setText(announcements.get(i).getMessage());
         holder.itemTvDate.setText(String.format("%s", announcements.get(i).getDate()));
@@ -82,6 +96,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         public ImageView itemIvView;
         public TextView itemTvDate;
         public TextView itemMessage;
+        public CardView itemCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,13 +106,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             itemIvView = (ImageView)itemView.findViewById(R.id.ivViewed);
             itemTvDate = (TextView)itemView.findViewById(R.id.tvDate);
             itemMessage = (TextView)itemView.findViewById(R.id.tvAnnounceMessage);
+            itemCardView = (CardView)itemView.findViewById(R.id.cvAnnounceRow);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    activity.onItemClick(announcements.indexOf(v.getTag()));
-                }
-            });
+            itemView.setOnClickListener(v -> activity.onItemClick(announcements.indexOf((Announcement) v.getTag())));
         }
 
     }

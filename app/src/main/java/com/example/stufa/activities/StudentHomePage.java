@@ -116,18 +116,18 @@ public class StudentHomePage extends AppCompatActivity implements AnnouncementAd
         announcements = new ArrayList<>();
         bookings = new ArrayList<>();
 
-        for(int i = 0; i < Utilities.DataCache.size(); i++)
-        {
-            announcement = Utilities.DataCache.get(i);
-            announcements.add(announcement);
-        }
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rView.setLayoutManager(layoutManager);
 
-        adapter = new AnnouncementAdapter(StudentHomePage.this,announcements);
-        rView.setAdapter(adapter);
+
 
         readData(list -> totalNumberOfBookings = list.size());
+        readAnnouncements(list -> {
+            announcements = list;
+            adapter = new AnnouncementAdapter(StudentHomePage.this,announcements);
+            rView.setAdapter(adapter);
+        });
 
         btnAllowanceRelatedQuery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,9 +238,38 @@ public class StudentHomePage extends AppCompatActivity implements AnnouncementAd
             }
         });
     }
+
+    private void readAnnouncements(FireCallBack fireCallBack)
+    {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Announcements");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Announcement> List = new ArrayList<>();
+                for(DataSnapshot ds : snapshot.getChildren())
+                {
+                    announcement = ds.getValue(Announcement.class);
+                    announcement.setMessage("");
+                    List.add(announcement);
+                }
+
+                fireCallBack.onFireCallback(List);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private  interface FireBaseCallBack
     {
         void onCallBack(ArrayList<Booking> list);
+    }
+
+    private interface FireCallBack
+    {
+        void onFireCallback(ArrayList<Announcement> list);
     }
 
 

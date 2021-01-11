@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Announcement implements Serializable
 {
+    private  String aId;
     private String title;
     private String message;
     private String date;
@@ -16,10 +17,12 @@ public class Announcement implements Serializable
     public Announcement() {
     }
 
-    public Announcement(String title, String message, String date) {
+    public Announcement(String aId,String title, String message, String date, boolean viewed) {
         this.title = title;
         this.message = message;
         this.date = date;
+        this.aId = aId;
+        this.viewed = viewed;
     }
 
     public String getTitle() {
@@ -52,6 +55,14 @@ public class Announcement implements Serializable
 
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
+    }
+
+    public String getaId() {
+        return aId;
+    }
+
+    public void setaId(String aId) {
+        this.aId = aId;
     }
 
     @Exclude

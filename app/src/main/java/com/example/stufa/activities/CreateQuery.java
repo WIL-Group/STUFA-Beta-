@@ -99,6 +99,8 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
             insertData();
 
 
+
+
         });
 
         btnDelete.setOnClickListener(v -> {
