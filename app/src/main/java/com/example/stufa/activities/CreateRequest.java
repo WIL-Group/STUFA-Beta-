@@ -18,11 +18,11 @@ public class CreateRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getString(R.string.create_a_request));
-        //actionBar.setIcon(R.drawable.person);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle(getString(R.string.create_a_request));
+//        //actionBar.setIcon(R.drawable.person);
+//        actionBar.setDisplayUseLogoEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(true);
 
     }
 }

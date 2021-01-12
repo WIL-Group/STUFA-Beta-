@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.stufa">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.STUFA">
+        <activity android:name=".activities.StudentProfile"/>
         <activity android:name=".activities.AnnouncementBrowsing" />
+        <activity android:name=".activities.Login" />
         <activity android:name=".activities.FillForm" />
         <activity android:name=".activities.CreateRequest" />
         <activity android:name=".activities.CreateBooking" />
@@ -19,7 +19,7 @@
         <activity android:name=".activities.ForgotPassword" />
         <activity android:name=".activities.CreateAccount" />
         <activity android:name=".activities.StudentHomePage" />
-        <activity android:name=".activities.Login">
+        <activity android:name=".activities.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,5 +31,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

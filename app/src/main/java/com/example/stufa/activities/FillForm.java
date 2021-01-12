@@ -14,11 +14,11 @@ public class FillForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_form);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getString(R.string.fill_form));
-        //actionBar.setIcon(R.drawable.person);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle(getString(R.string.fill_form));
+//        //actionBar.setIcon(R.drawable.person);
+//        actionBar.setDisplayUseLogoEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(true);
 
     }
 }

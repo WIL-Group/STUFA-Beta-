@@ -1,15 +1,12 @@
 package com.example.stufa.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,36 +14,18 @@ import android.widget.Toast;
 
 import com.example.stufa.R;
 import com.example.stufa.app_utilities.QueryAdapter;
-import com.example.stufa.data_models.Announcement;
 import com.example.stufa.data_models.Query;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 
-public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemClicked  {
+public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemClicked {
 
+    /*---------------------Variables----------------------------------*/
     CheckBox cbBookAllowance, cbMealAllowance, cbAccommodationOrTransportAllowance;
     EditText etQueryMessage;
     Button btnSave, btnDelete, btnSubmit;
@@ -61,22 +40,15 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
     com.google.firebase.database.Query query1;
     private String date;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_query);
 
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle(getString(R.string.create_a_query));
-        actionBar.setIcon(R.drawable.query);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-
+        /*---------------------Hooks----------------------------------*/
         cbBookAllowance = findViewById(R.id.cbBookAllowance);
         cbMealAllowance = findViewById(R.id.cbMealAllowance);
-        cbAccommodationOrTransportAllowance = findViewById(R.id.cbAccomodationOrTransportAllowance);
+        cbAccommodationOrTransportAllowance = findViewById(R.id.cbAccommodationOrTransportAllowance);
         etQueryMessage = findViewById(R.id.etQueryMessage);
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
@@ -89,32 +61,34 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
         layoutManager = new LinearLayoutManager(CreateQuery.this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-       readData(list -> {
-           myAdapter = new QueryAdapter(list,CreateQuery.this);
-           recyclerView.setAdapter(myAdapter);
-       });
+        //sets the query list to my adapter
+        readData(list -> {
+            myAdapter = new QueryAdapter(list,CreateQuery.this);
+            recyclerView.setAdapter(myAdapter);
+        });
 
         btnSave.setOnClickListener(v -> {
+            //method that inserts data into the recyclerview list when button save is clicked
+            
             insertData();
-
-
-
-
         });
 
         btnDelete.setOnClickListener(v -> {
+            //deletes the query clicked on the recyclerview list
+            
             if(query == null)
             {
                 Toast.makeText(CreateQuery.this,"Please select a query to delete", Toast.LENGTH_SHORT).show();
             }
             else
             {
-               deleteData();
+                deleteData();
             }
         });
 
         btnSubmit.setOnClickListener(v -> {
+            //submits the entire query to the firebase realtime database
+            
             if(query != null)
             {
                 submittedQueryReff = FirebaseDatabase.getInstance().getReference().child("submitted_queries");
@@ -127,8 +101,8 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
                 Toast.makeText(CreateQuery.this, "Please select query from the list!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
+    }
 
     @Override
     public void onItemClicked(int index) {
@@ -247,4 +221,5 @@ public class CreateQuery extends AppCompatActivity implements QueryAdapter.ItemC
     {
         void onCallBack(ArrayList<Query> list);
     }
+    
 }

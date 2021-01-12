@@ -1,7 +1,6 @@
 package com.example.stufa.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -11,6 +10,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -31,6 +31,7 @@ import java.util.Map;
 
 public class CreateAccount extends AppCompatActivity {
 
+    /*-------------------------Variables------------------------*/
     EditText etName, etSurname, etEmail, etStudentNumber, etPassword, etConfirmPassword;
     Button btnSignUp;
     TextView tvLogin;
@@ -45,13 +46,10 @@ public class CreateAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_create_account);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getString(R.string.create_new_account));
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-
+        /*-------------------------Hooks------------------------*/
         etName = findViewById(R.id.etName);
         etSurname = findViewById(R.id.etSurname);
         etEmail = findViewById(R.id.etEmail);
@@ -206,6 +204,7 @@ public class CreateAccount extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CreateAccount.this, Login.class);
                 startActivity(intent);
+                finish();
             }
         });
 

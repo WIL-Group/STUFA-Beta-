@@ -79,7 +79,7 @@ public class FirebaseCRUDHelper
                 //Utilities.hideProgressBar(pb);
                 Utilities.show(a, "CANCELLED" + error.getMessage());
             }
-            });
-        }
+        });
+    }
 
 }

@@ -109,6 +109,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             itemCardView = (CardView)itemView.findViewById(R.id.cvAnnounceRow);
 
             itemView.setOnClickListener(v -> activity.onItemClick(announcements.indexOf((Announcement) v.getTag())));
+
         }
 
     }

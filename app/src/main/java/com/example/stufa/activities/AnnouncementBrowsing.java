@@ -57,11 +57,11 @@ public class AnnouncementBrowsing extends AppCompatActivity implements Announcem
         announcementRef = FirebaseDatabase.getInstance().getReference().child("Announcements");
 
 
-       readData(List -> {
-           announcements = List;
-           adapter = new AnnouncementAdapter(AnnouncementBrowsing.this,announcements);
-           rv.setAdapter(adapter);
-       });
+        readData(List -> {
+            announcements = List;
+            adapter = new AnnouncementAdapter(AnnouncementBrowsing.this,announcements);
+            rv.setAdapter(adapter);
+        });
         /*date = new SimpleDateFormat("dd MM, yyyy", Locale.getDefault()).format(new Date());
 
         announcement = new Announcement(id,"Ditaba","Corona closes schools",date,viewed);

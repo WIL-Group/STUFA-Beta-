@@ -1,7 +1,6 @@
 package com.example.stufa.activities;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.stufa.R;
 import com.example.stufa.app_utilities.Utilities;
@@ -29,9 +27,12 @@ import java.util.Locale;
 
 public class CreateBooking extends AppCompatActivity {
 
+    /*------------------------Variables---------------------------*/
     CheckBox cbQueryRelatedBooking, cbGeneralBooking, cbRequestRelatedBooking;
     Button btnCreate, btnDelete, btnSubmit;
-    TextView tvStudentNumer, tvBookingType, tvDateCreated;
+    TextView tvStudentNumer, tvNameAndSurname, tvBookingType, tvDateCreated;
+
+    androidx.appcompat.widget.Toolbar my_toolbar;
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
@@ -40,27 +41,25 @@ public class CreateBooking extends AppCompatActivity {
     Booking booking;
     String userID, bType, studentNumber, date;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_booking);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getString(R.string.booking));
-        actionBar.setIcon(R.drawable.booking);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-
+        /*------------------Hooks--------------------------------------*/
         cbQueryRelatedBooking = findViewById(R.id.cbQueryRelatedBooking);
         cbGeneralBooking = findViewById(R.id.cbGeneralBooking);
         cbRequestRelatedBooking = findViewById(R.id.cbRequestRelatedBooking);
         btnCreate = findViewById(R.id.btnCreate);
         btnDelete = findViewById(R.id.btnDelete);
         btnSubmit = findViewById(R.id.btnSubmit);
+        //look at this mistake: tvStudentNumer = findViewById(R.id.tvStudentNumer);
         tvStudentNumer = findViewById(R.id.tvNameAndSurname);
         tvBookingType = findViewById(R.id.tvBookingType);
         tvDateCreated = findViewById(R.id.tvDateCreated);
+        
+        
+        my_toolbar = findViewById(R.id.my_toolbar);
 
         tvBookingType.setVisibility(View.GONE);
         tvStudentNumer.setVisibility(View.GONE);
@@ -69,9 +68,13 @@ public class CreateBooking extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
-        date = new SimpleDateFormat("dd MM, yyyy", Locale.getDefault()).format(new Date());
+        /*------------------sets the date format---------------------*/
+        date = new SimpleDateFormat("dd, MM, yyyy", Locale.getDefault()).format(new Date());
 
         userID = firebaseAuth.getCurrentUser().getUid();
+
+        /*--------------------Tool Bar----------------------*/
+        setSupportActionBar(my_toolbar);
 
         //Reads the data entered when the user registered just to check if we can read back the data
         DocumentReference documentReference = firestore.collection("users").document(userID);
@@ -84,15 +87,21 @@ public class CreateBooking extends AppCompatActivity {
             }
         });
 
-
-        btnCreate.setOnClickListener(v ->
-                createBooking());
+        btnCreate.setOnClickListener(v -> {
+            //creates a booking and displays its details for the user to see before submitting 
+            
+            createBooking();
+        });
 
         btnDelete.setOnClickListener(v -> {
+            //deletes the booking if the user decides not to make a booking anymore
+            
             deleteBooking();
         });
 
         btnSubmit.setOnClickListener(v -> {
+            //submits the booking to the firebase database and sends it to the staff side to view
+
             if(!tvStudentNumer.getText().toString().trim().equals(studentNumber))
             {
                 Utilities.show(CreateBooking.this, "Please select a query type to submit!");
@@ -111,6 +120,7 @@ public class CreateBooking extends AppCompatActivity {
         });
 
     }
+
     public void createBooking()
     {
         if(cbQueryRelatedBooking.isChecked())
@@ -161,4 +171,5 @@ public class CreateBooking extends AppCompatActivity {
         tvStudentNumer.setVisibility(View.GONE);
         tvDateCreated.setVisibility(View.GONE);
     }
+    
 }

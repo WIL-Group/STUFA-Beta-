@@ -3,7 +3,6 @@ package com.example.stufa.app_utilities;
 import android.app.Application;
 
 
-
 public class ApplicationClass extends Application
 {
     @Override
